@@ -19,14 +19,18 @@ elixir(mix =>
        {
            var
                assets       = 'resources/assets/',
-               node_modules = '../../../node_modules/';
+           bower       = './bower_components/',
+               node_modules = 'node_modules/';
 
            mix
                .sass('app.scss', 'public/css/app.css')
 
                .copy(assets + 'images', 'public/images')
                .copy(node_modules + 'materialize-css/fonts', 'public/build/fonts')
-
+               .scripts([
+                   bower + "jquery/dist/jquery.min.js",
+                   assets + "js/Main.js",
+               ], 'public/js/scripts.js')
                .webpack('app.js')
 
                /*

@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('tasks', require('./components/Tasks.vue'));
 
 new Vue({
     el: 'body'

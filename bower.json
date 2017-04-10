@@ -1,0 +1,20 @@
+{
+  "name": "diplom_project",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Kirill Kopylov <kirillduraley@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "\"\"",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

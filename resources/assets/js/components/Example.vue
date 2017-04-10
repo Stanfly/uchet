@@ -23,6 +23,10 @@
         },
         methods: {
             addItems() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/'
+                });
                 for(var i = 0; i < 5; i++) {
                     this.items.push({
                         title: 'Record #' + i
