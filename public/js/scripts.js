@@ -5,8 +5,10 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 
 $(document).ready(function(){
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-        jqXHR.setRequestHeader('X-CSRF-Token', csrf_token);
+        jqXHR.setRequestHeader('X-CSRF-Token', window.Laravel.csrfToken);
     });
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
 });
 
 //# sourceMappingURL=scripts.js.map

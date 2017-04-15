@@ -2,28 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
-use App\Task;
+use Illuminate\Http\Request;
 
-/**
- * Class HomeController
- * @package App\Http\Controllers
- */
-final class HomeController extends Controller
+class HomeController extends Controller
 {
     /**
-     * HomeController constructor.
+     * Create a new controller instance.
+     *
+     * @return void
      */
+
     public function __construct()
     {
-
+        //$this->middleware('auth');
     }
-    /**
-     * @return View
-     */
-    public function welcome() : View
-    {
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
+        return view('home');
+    }
+    public function welcome()
+    {
+        return view('welcome');
     }
 }

@@ -52,3 +52,17 @@ main {
 .brand-logo {
     font-weight: 300;
 }
+.banner-img {
+    height: 460px;
+    background-size: cover;
+    position: relative;
+}
+.banner-img:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url(images/bg_img.png);
+}

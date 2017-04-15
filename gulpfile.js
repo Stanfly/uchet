@@ -26,6 +26,7 @@ elixir(mix =>
                .sass('app.scss', 'public/css/app.css')
 
                .copy(assets + 'images', 'public/images')
+               .copy(assets + 'fonts', 'public/fonts')
                .copy(node_modules + 'materialize-css/fonts', 'public/build/fonts')
                .scripts([
                    bower + "jquery/dist/jquery.min.js",
