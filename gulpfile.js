@@ -31,6 +31,7 @@ elixir(mix =>
                .webpack('app.js')
                .scripts([
                    bower +'jquery/dist/jquery.min.js',
+                   bower +'highcharts/highcharts.js',
                    node_modules + 'materialize-css/dist/js/materialize.min.js',
                    assets + 'js/Global.js',
                    assets + 'js/Main.js',

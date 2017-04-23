@@ -16,8 +16,8 @@
                             <div class="card">
                                 <div class="card-content">
                                     <span class="card-title">{{ $house->name }}</span>
-                                    <br><lable>Площадь в м<sup>2</sup>: </lable><span class="house_area">{{ $house->area }}</span>
-                                    <br><lable>Проживает: </lable><span class="house_residents">{{ $house->residents }}</span>
+                                    <br><label>Площадь в м<sup>2</sup>: </label><span class="house_area">{{ $house->area }}</span>
+                                    <br><label>Проживает: </label><span class="house_residents">{{ $house->residents }}</span>
                                 </div>
                                 <div class="card-action">
                                     <a href="{{ route('houses.show', $house->id) }}">Просмотр</a>

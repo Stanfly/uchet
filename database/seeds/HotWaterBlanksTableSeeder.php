@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\House;
 
-class ColdWaterBlanksTableSeeder extends Seeder
+class HotWaterBlanksTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +16,8 @@ class ColdWaterBlanksTableSeeder extends Seeder
 
         $limit = 150;
 
-
         for ($i = 0; $i < $limit; $i++) {
-            DB::table('cold_water_blanks')->insert([
+            DB::table('hot_water_blanks')->insert([
                 'house_id' => House::all()->random(1)->id,
                 'norm' => $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 100),
                 'total_volume_of_MKD' => $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 100),

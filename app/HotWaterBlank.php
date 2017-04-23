@@ -2,7 +2,7 @@
 
 namespace App;
 
-class ColdWaterBlank extends Blank_Base
+class HotWaterBlank extends Blank_Base
 {
     public $timestamps = false;
 
@@ -17,4 +17,7 @@ class ColdWaterBlank extends Blank_Base
         'date'
     ];
 
+    public function house() {
+        //return $this->belongsTo(House::class, 'house_id');
+    }
 }

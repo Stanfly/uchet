@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Cache\Repository;
+use App\ColdWaterBlank;
+use App\ElectricityBlank;
+use App\HotWaterBlank;
+use App\Prognosis;
+use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Http\Request;
 use App\House;
 
@@ -10,29 +15,23 @@ use App\Http\Requests;
 
 class HouseController extends Controller
 {
-    private $houses;
-
-    public function __construct(Repository $houses)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->houses = $houses;
     }
+
     public function index () {
         $user = auth()->user();
-        try {
-            $houses = $this->houses->getAll($user);
-        } catch (InvalidArgumentException $argumentException) {
-            logger(__METHOD__ . PHP_EOL . $argumentException->getMessage());
-            return redirect()->to('home');
-        } catch (ShopException $shopException) {
-            return redirect()->to('home');
-        }
-        $houses = House::select('id') //orderBy('created_at', 'desc')->get();
+        $houses = House::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('pages.houses.index',compact('houses'));
     }
     public function create(Request $request){
+        $user = auth()->user();
         $house = new House;
         $house->name = $request->get('house_name');
+        $house->user_id = $user->id;
         $house->area = $request->get('house_area');
         $house->residents = $request->get('house_residents');
         $house->save();
@@ -43,6 +42,26 @@ class HouseController extends Controller
         return redirect("/houses");
     }
     public function show(House $house){
-        return view('pages.houses.show',compact('house'));
+        $cwbs = ColdWaterBlank::where('house_id', $house->id)
+            ->orderBy('date', 'desc')
+            ->get();
+        $hwbs = HotWaterBlank::where('house_id', $house->id)
+            ->orderBy('date', 'desc')
+            ->get();
+        $elbs = ElectricityBlank::where('house_id', $house->id)
+            ->orderBy('date', 'desc')
+            ->get();
+        $cwbs_prognosis = Prognosis::get_prognosis_array($cwbs, 'desc');
+        $hwbs_prognosis = Prognosis::get_prognosis_array($hwbs, 'desc');
+        $elbs_prognosis = Prognosis::get_prognosis_array($elbs, 'desc');
+        return view('pages.houses.show',compact([
+            'house',
+            'cwbs',
+            'hwbs',
+            'elbs',
+            'cwbs_prognosis',
+            'hwbs_prognosis',
+            'elbs_prognosis',
+        ]));
     }
 }

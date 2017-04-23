@@ -16,10 +16,15 @@ class UsersTableSeeder extends Seeder
         $limit = 10;
 
         for ($i = 0; $i < $limit; $i++) {
+            $email = $faker->email;
+            $password = $faker->password();
+            echo $email .PHP_EOL;
+            echo $password .PHP_EOL.PHP_EOL;
+
             DB::table('users')->insert([
                 'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => bcrypt( $faker->password()),
+                'email' => $email,
+                'password' => bcrypt($password),
             ]);
         }
     }
