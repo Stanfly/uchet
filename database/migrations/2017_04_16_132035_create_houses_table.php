@@ -15,7 +15,7 @@ class CreateHousesTable extends Migration
         Schema::create('houses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('user')
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->float('area');
@@ -31,6 +31,6 @@ class CreateHousesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('houses');
+        Schema::dropIfExists('houses');
     }
 }

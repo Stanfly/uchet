@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateElectricityBlanksTable extends Migration
+class CreateBlanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +12,13 @@ class CreateElectricityBlanksTable extends Migration
      */
     public function up()
     {
-        Schema::create('electricity_blanks', function (Blueprint $table) {
+        Schema::create('blanks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('house_id')->unsigned()->index();
             $table->foreign('house_id')->references('id')->on('houses')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->float('tariff_single');
-            $table->float('tariff_day');
-            $table->float('tariff_night');
-            $table->float('consumption');
-            $table->float('sum_day');
-            $table->float('sum_night');
-            $table->float('charged');
-            $table->float('recalculation');
-            $table->float('total_charged');
+            $table->float('tariff');
+            $table->float('volume');
             $table->date('date');
         });
     }
@@ -38,6 +30,6 @@ class CreateElectricityBlanksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('electricity_blanks');
+        Schema::drop('blanks');
     }
 }

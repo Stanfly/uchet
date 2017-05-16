@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ColdWaterBlank;
+use App\Blank;
 use App\ElectricityBlank;
 use App\HotWaterBlank;
 use App\Prognosis;
@@ -42,7 +42,7 @@ class HouseController extends Controller
         return redirect("/houses");
     }
     public function show(House $house){
-        $cwbs = ColdWaterBlank::where('house_id', $house->id)
+        $cwbs = Blank::where('house_id', $house->id)
             ->orderBy('date', 'desc')
             ->get();
         $hwbs = HotWaterBlank::where('house_id', $house->id)

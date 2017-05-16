@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-
-class Prognosis extends Blank_Base
+use Illuminate\Database\Eloquent\Model;
+class Prognosis extends Model
 {
 
     public static function get_trend_ab($data_y, $order){
