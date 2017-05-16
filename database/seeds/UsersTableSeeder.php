@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $limit = 10;
+        $limit = 2;
 
         for ($i = 0; $i < $limit; $i++) {
             $email = $faker->email;

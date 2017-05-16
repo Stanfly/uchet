@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\House;
+use App\Service;
 
 class BlanksTableSeeder extends Seeder
 {
@@ -14,12 +15,13 @@ class BlanksTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $limit = 150;
+        $limit = 1500;
 
 
         for ($i = 0; $i < $limit; $i++) {
             DB::table('blanks')->insert([
                 'house_id' => House::all()->random(1)->id,
+                'service_id' => Service::all()->random(1)->id,
                 'tariff' => $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 100),
                 'volume' => $faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 100),
                 'date' => $faker->date()

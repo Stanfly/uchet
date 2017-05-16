@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlanksTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +13,15 @@ class CreateBlanksTable extends Migration
      */
     public function up()
     {
-        Schema::create('blanks', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('house_id')->unsigned()->index();
+            $table->integer('house_id')->unsigned()->nullable()->index();
             $table->foreign('house_id')->references('id')->on('houses')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->float('tariff');
-            $table->float('volume');
-            $table->date('date');
+            $table->string('name');
+            $table->string('icon_name');
+            $table->string('icon_class');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -30,6 +32,6 @@ class CreateBlanksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('blanks');
+        Schema::drop('services');
     }
 }

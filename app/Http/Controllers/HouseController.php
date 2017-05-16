@@ -6,6 +6,7 @@ use App\Blank;
 use App\ElectricityBlank;
 use App\HotWaterBlank;
 use App\Prognosis;
+use App\Service;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Http\Request;
@@ -42,26 +43,17 @@ class HouseController extends Controller
         return redirect("/houses");
     }
     public function show(House $house){
-        $cwbs = Blank::where('house_id', $house->id)
-            ->orderBy('date', 'desc')
+        $services = Service::where('house_id', $house->id)->orWhere('house_id', null)
+            ->orderBy('id', 'asc')
             ->get();
-        $hwbs = HotWaterBlank::where('house_id', $house->id)
-            ->orderBy('date', 'desc')
-            ->get();
-        $elbs = ElectricityBlank::where('house_id', $house->id)
-            ->orderBy('date', 'desc')
-            ->get();
-        $cwbs_prognosis = Prognosis::get_prognosis_array($cwbs, 'desc');
-        $hwbs_prognosis = Prognosis::get_prognosis_array($hwbs, 'desc');
-        $elbs_prognosis = Prognosis::get_prognosis_array($elbs, 'desc');
-        return view('pages.houses.show',compact([
-            'house',
-            'cwbs',
-            'hwbs',
-            'elbs',
-            'cwbs_prognosis',
-            'hwbs_prognosis',
-            'elbs_prognosis',
-        ]));
+        foreach ($services as $service) {
+            $service['blanks'] = Blank::where('service_id', $service->id)
+                ->where('house_id', $house->id)
+                ->orderBy('date', 'desc')
+                ->get();
+            $service['prognosis'] = Prognosis::get_prognosis_array($service['blanks'], 'desc');
+        }
+
+        return view('pages.houses.show',compact(['house', 'services']));
     }
 }
